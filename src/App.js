@@ -1,35 +1,87 @@
-import { toHaveAccessibleDescription } from "@testing-library/jest-dom/dist/matchers";
 import React from "react";
+
 import "./App.css";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "John",
+      myName: "John",
+      showHome: true,
     };
-    console.log("Constructor Triggered", this.state.name);
-    var ab = "vivek";
+
+    // console.log("Constructor......... From Parent", this.state.myName);
   }
 
-  /*before rendering*/
+  // componentWillMount() {
+  //   this.setState({ myName: "Peter" }, () => {
+  //     console.log("componentWillMount......... From Parent", this.state.myName);
+  //   });
+  // }
 
-  componentWillMount() {
-    const ab = "test ab";
-    this.setState({ name: ab });
-    console.log("ComponentWillMount Triggered", this.state.name);
-  }
+  changeName = () => {
+    this.setState({ myName: "Marvel Avenger" });
+  };
 
-  /*after dome render*/
+  getName = () => {
+    console.log(this.state.myName);
+  };
 
-  componentDidMount() {
-    this.setState({ name: "Lokesh" });
-    console.log("ComponentDidMount Triggered", this.state.name);
-  }
+  mountUnmount = () => {
+    this.setState({ showHome: !this.state.showHome });
+  };
 
   render() {
-    return <div className="App">{this.state.name}</div>;
+    console.log(this);
+    return (
+      <div>
+        {/* {this.state.myName} */}
+        {/* {this.state.showHome ? <Home name={this.state.myName} /> : null} */}
+        <div>
+          <button className="btn btn-primary" onClick={this.changeName}>
+            Change Name
+          </button>
+          <br />
+          <button className="btn btn-primary" onClick={this.getName}>
+            Get Name
+          </button>
+          <div>
+            <button className="btn btn-warning" onClick={this.mountUnmount}>
+              (Un) Mount
+            </button>
+          </div>
+        </div>
+      </div>
+    );
   }
+
+  // componentDidMount() {
+  //   // this.setState({ myName: "Avenger" }, () => {
+  //   //   console.log("componentDidMount......... From Parent", this.state.myName);
+  //   // });
+
+  //   console.log("componentDidMount ..... From Parent");
+  // }
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log(
+  //     "shouldComponentUpdate......... From Parent",
+  //     nextProps,
+  //     nextState
+  //   );
+  //   if (nextState.myName === "Avenger") {
+  //     return false;
+  //   }
+  //   return true;
+  // }
+
+  // componentWillUpdate() {
+  //   console.log("componentWillUpdate........ From Parent");
+  // }
+
+  // componentDidUpdate() {
+  //   console.log("componentDidUpdate........ From Parent");
+  // }
 }
 
 export default App;
