@@ -5,108 +5,53 @@ class Home extends React.Component {
     super(props);
   }
 
-  /*Arrow function */
+  /* Arrow function */
+
   thisKey = () => {
     console.log(this);
   };
 
-  /*variables*/
-
-  variables = () => {
-    var ab = "test";
-
-    if (ab === "test") {
-      let ab = "Let key";
-      console.log(ab);
-    }
-    console.log(ab);
-  };
-
-  destructuring = () => {
-    const empDetails = ["John", "8956", "Sr Engineer"];
-
-    const [empName, empId, designation] = empDetails;
-    console.log(empName, empId, designation);
-    const empData = {
-      name: "John",
-      employeeId: "8956",
-      designation: "Sr Engineer",
-      experience: 10,
-      bloodGroup: "B Positive",
-    };
-
-    const { name, employeeId, bloodGroup } = empData;
-    console.log(name, employeeId, bloodGroup);
-  };
+  // spread operator
 
   spreadFunction = () => {
     const classComp = ["state", "constructor", "render"];
     const funcComp = ["props", "useEffect", "return"];
-    const mergeComp = [...classComp, ...funcComp];
-    // console.log(mergeComp);
+    const mergeTwoarray = [...classComp, ...funcComp];
+    // console.log(mergeTwoarray);
 
-    const personalDetails = { name: "Peter", age: 32 };
-    const officeDetails = { officeName: "Google", location: "USA" };
+    const obj1 = { name: "peter", age: 32 };
+    const obj2 = { location: "bangalore", country: "India" };
     // old way
 
-    const mergeObj = Object.assign(personalDetails, officeDetails);
-    const newWayofMerget = { ...personalDetails, officeDetails };
-    const copyPersonalDetails = { ...personalDetails };
-    personalDetails.name = "John";
-    console.log(personalDetails, copyPersonalDetails);
+    const mergeTwoObj = { ...obj1, ...obj2 };
+    //console.log(mergeTwoObj);
+
+    // destructuring
+    const arrayNumbers = [1, 2, 3, 4, 5];
+
+    const [one, two, ...rest] = arrayNumbers;
+    console.log(...rest);
+  };
+
+  ternaryFunction = () => {
+    let ab = 1;
+    return ab === 3 ? console.log("true") : console.log("false");
   };
 
   render() {
-    const mapArray = {
-      data: [
-        {
-          one: "onedata",
-          two: "twodata",
-          three: "threedata",
-          four: "fourdata",
-        },
-        {
-          one: "oneObjdata",
-          two: "twoObjdata",
-          three: "threeObjdata",
-          four: "fourObjdata",
-        },
-      ],
-    };
     return (
       <div>
-        <div>
-          <button className="btn btn-primary" onClick={this.thisKey}>
-            This Key
-          </button>
-        </div>
-
-        <div>
-          <button className="btn btn-primary" onClick={this.variables}>
-            Variables
-          </button>
-        </div>
-
-        <div>
-          <button className="btn btn-primary" onClick={this.destructuring}>
-            Destructuring
-          </button>
-        </div>
-
-        <div>
-          <button className="btn btn-primary" onClick={this.spreadFunction}>
-            Spread Operator
-          </button>
-        </div>
-        <ul>
-          {mapArray.data.map((item, index) => {
-            return (
-              <li key={index}>
-                {item.one} {item.two}
-              </li>
-            );
-          })}
-        </ul>
+        <button className="btn btn-primary" onClick={this.thisKey}>
+          Arrow Function
+        </button>{" "}
+        <br />
+        <br />
+        <button className="btn btn-primary" onClick={this.spreadFunction}>
+          Spread
+        </button>
+        <button className="btn btn-primary" onClick={this.ternaryFunction}>
+          Tern Function
+        </button>
       </div>
     );
   }
