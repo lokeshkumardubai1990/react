@@ -1,6 +1,7 @@
 import React from "react";
 
 import "./App.css";
+import Home from "./Home";
 
 class App extends React.Component {
   constructor(props) {
@@ -36,7 +37,7 @@ class App extends React.Component {
     return (
       <div>
         {/* {this.state.myName} */}
-        {/* {this.state.showHome ? <Home name={this.state.myName} /> : null} */}
+        {this.state.showHome ? <Home name={this.state.myName} /> : null}
         <div>
           <button className="btn btn-primary" onClick={this.changeName}>
             Change Name

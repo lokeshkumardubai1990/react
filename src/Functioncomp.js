@@ -1,16 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Functioncomp = (props) => {
-  const [name, setName] = useState("Peter");
+  const [count, setCount] = useState(0);
+  const [age, setAge] = useState(1);
 
-  const changeName = () => {
-    setName("Lokesh");
+  // two arg one is function another one is dependency []
+  useEffect(() => {
+    console.log("Use Effect called");
+  }, [count]);
+
+  const changeCount = () => {
+    setCount(count + 1);
   };
 
+  const changeage = () => {
+    setAge(2);
+  };
   return (
     <div>
-      <p>Functional Component {name}</p>
-      <button onClick={changeName}>Change Name</button>
+      {console.log("Return called")}
+      <p>Hai {count}</p>
+      <button onClick={changeCount}>Change Count</button>
+      <button onClick={changeage}>Change Age</button>
     </div>
   );
 };

@@ -1,8 +1,21 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import {
+  HashRouter as Router,
+  Routes,
+  Route,
+  Link,
+  useLocation,
+  useNavigate,
+  Navigate,
+  useParams,
+} from "react-router-dom";
 
-const Dashboard = () => {
-  return <p>Dashboard component</p>;
+const Dashboard = (props) => {
+  return (
+    <div>
+      Dashboard component <input type="text" />
+    </div>
+  );
 };
 
 const About = () => {
@@ -38,14 +51,14 @@ class Approuter extends React.Component {
   render() {
     return (
       <div>
-        <BrowserRouter>
+        <Router>
           <Navigation />
-          <Routes>
-            <Route exact path="/" element={<Dashboard />} />
+          <Routes history={useLocation}>
+            <Route path="/" element={<Dashboard />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
-        </BrowserRouter>
+        </Router>
       </div>
     );
   }

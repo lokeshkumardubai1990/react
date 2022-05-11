@@ -3,6 +3,9 @@ import React from "react";
 class Home extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      name: this.props.name,
+    };
   }
 
   /* Arrow function */
@@ -38,6 +41,17 @@ class Home extends React.Component {
     return ab === 3 ? console.log("true") : console.log("false");
   };
 
+  // variables
+
+  variablesScope = () => {
+    let ab1 = "Parent";
+    if (ab1 === "Parent") {
+      var ab = "Child";
+      console.log(ab1);
+    }
+    console.log(ab);
+  };
+
   render() {
     return (
       <div>
@@ -49,8 +63,15 @@ class Home extends React.Component {
         <button className="btn btn-primary" onClick={this.spreadFunction}>
           Spread
         </button>
+        <br />
+        <br />
         <button className="btn btn-primary" onClick={this.ternaryFunction}>
           Tern Function
+        </button>
+        <br />
+        <br />
+        <button className="btn btn-primary" onClick={this.variablesScope}>
+          Variables
         </button>
       </div>
     );
