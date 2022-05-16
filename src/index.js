@@ -5,9 +5,10 @@ import App from "./App";
 import Home from "./Home";
 
 import reportWebVitals from "./reportWebVitals";
+import Usereducerfunc from "./Component/usereducer";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<Home />);
+root.render(<Usereducerfunc />);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
