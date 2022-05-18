@@ -1,18 +1,20 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, createRef, useState } from "react";
 import Childref from "./child";
 const Usereffunc = () => {
   const inputRef = useRef();
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     inputRef.current = "Test";
   }, []);
-  const getValue = () => {
-    console.log(inputRef.current);
-  };
+
+  useEffect(() => {
+    console.log(count, inputRef.current);
+  }, [count]);
+
   return (
     <>
-      <input ref={inputRef} />
-      <button onClick={getValue}>get Value</button>
+      <button onClick={() => setCount(count + 1)}>Count</button>
     </>
   );
 };

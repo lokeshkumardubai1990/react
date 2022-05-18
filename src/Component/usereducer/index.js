@@ -1,58 +1,53 @@
 import React, { useState, useReducer } from "react";
 
-const initialState = { count: 0, addTodo: [] };
+const initialstate = { count: 0, addTodo: [] };
 
-const reducer = (initialState, action) => {
+const reducer = (state, action) => {
   switch (action.type) {
-    case "add":
+    case "increment":
       return {
-        ...initialState,
-        count: initialState.count + 1,
+        ...state,
+        count: state.count + 1,
+      };
+    case "decrement":
+      return {
+        ...state,
+        count: state.count - 1,
       };
 
-    case "sub":
+    case "addtodo":
       return {
-        ...initialState,
-        count: initialState.count - 1,
+        ...state,
+        addTodo: state.addTodo.concat(action.payLoad),
       };
-
-    case "addTodo":
-      return {
-        ...initialState,
-        addTodo: initialState.addTodo.concat(action.payLoad),
-      };
-
     default:
-      return initialState;
+      return state;
   }
 };
 
-export default function Usereducerfunc() {
-  const [state, dispatch] = useReducer(reducer, initialState);
-
-  const increment = () => {
-    dispatch({ type: "add" });
-  };
+export default function Usereducerhook() {
+  const [state, dispatch] = useReducer(reducer, initialstate);
 
   const decrement = () => {
-    dispatch({ type: "sub" });
+    dispatch({ type: "decrement" });
+  };
+
+  const increment = () => {
+    dispatch({ type: "increment" });
   };
 
   const addTodo = () => {
-    dispatch({ type: "addTodo", payLoad: state.count });
+    dispatch({ type: "addtodo", payLoad: state.count });
   };
-
   return (
     <div>
+      <button onClick={decrement}>Decrement</button>
       {state.count}
-      {console.log(state.addTodo)}
-      <br />
       <button onClick={increment}>Increment</button>
       <br />
-      <button onClick={decrement}>Decrement</button>
-
-      <br />
-      <button onClick={addTodo}>Add Todo</button>
+      <hr />
+      {console.log(state.addTodo)}
+      <button onClick={addTodo}>Add todo</button>
     </div>
   );
 }
