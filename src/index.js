@@ -1,14 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import reducer from "./store/reducer";
+import { legacy_createStore as createStore } from "redux";
+import Reducer from "./store/reducer";
 import { Provider } from "react-redux";
 import App from "./App";
-import { legacy_createStore as createStore, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
 
 import reportWebVitals from "./reportWebVitals";
-const store = createStore(reducer, applyMiddleware(thunk));
+const store = createStore(Reducer);
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>

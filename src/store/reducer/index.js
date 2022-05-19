@@ -1,38 +1,17 @@
-import { ACTIONS } from "../actionTypes";
-import { combineReducers } from "redux";
-const initialstate = { userName: "Initial Name" };
+const initialState = { userName: "John" };
 
-const userDetails = (state = initialstate, action) => {
+const Reducer = (state = initialState, action) => {
+  console.log(state, action);
   switch (action.type) {
-    case ACTIONS.CHANGE:
+    case "changeUserName":
       return {
         ...state,
         userName: action.payLoad,
       };
-    case ACTIONS.FETCHDATA:
-      return {
-        ...state,
-        apiRes: action.payLoad,
-      };
+
     default:
       return state;
   }
 };
 
-//second reducer
-
-const initialTodo = { todoList: ["Vivek", "Mohan"] };
-
-const todo = (state = initialTodo, action) => {
-  switch (action.type) {
-    case "addTodo":
-      return {
-        ...state,
-        todoList: action.payLoad,
-      };
-    default:
-      return state;
-  }
-};
-
-export default combineReducers({ userDetails, todo });
+export default Reducer;
