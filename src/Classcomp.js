@@ -1,18 +1,24 @@
 import React from "react";
 
 import { connect } from "react-redux";
+import { ACTIONS } from "./store/actionTypes";
+import { changeUserName } from "./store/actions";
 
 class Classcomp extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
+    this.state = {
+      name: "Mohan Class",
+    };
   }
 
   render() {
     return (
       <div>
         Welcome {this.props.userName} &nbsp;
-        <button onClick={this.props.changeName}>Change Name</button>
+        <button onClick={() => this.props.changeName(this.state.name)}>
+          Change Name
+        </button>
       </div>
     );
   }
@@ -26,7 +32,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    changeName: () => dispatch({ type: "changeUserName", payLoad: "Peter" }),
+    changeName: (name) => dispatch(changeUserName(name)),
   };
 };
 

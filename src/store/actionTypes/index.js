@@ -1,3 +1,3 @@
 export const ACTIONS = {
-  CHANGE: "change",
+  CHANGE: "changeUsername",
 };
