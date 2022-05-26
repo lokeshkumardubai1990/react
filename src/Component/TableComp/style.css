@@ -1,0 +1,18 @@
+.table-inp {
+    width: 800px;
+    height: 200px;
+}
+
+td {
+    text-align: center;
+
+}
+
+tbody,
+td,
+tfoot,
+th,
+thead,
+tr {
+    border: 1px solid rgb(2, 1, 1);
+}
