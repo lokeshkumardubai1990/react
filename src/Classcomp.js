@@ -8,23 +8,23 @@ class Classcomp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "Mohan Class",
+      name: "Class Component",
     };
   }
 
   render() {
     return (
       <div>
-        Welcome {this.props.userName} &nbsp;
+        Welcome : <b>{this.props.userName}</b> &nbsp;
         <button onClick={() => this.props.changeName(this.state.name)}>
-          Change Name
+          Class Component
         </button>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   return {
     userName: state.userName,
   };

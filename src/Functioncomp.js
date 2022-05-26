@@ -15,10 +15,9 @@ function Functioncomp(props) {
 
   return (
     <div>
-      Name from Functional compoent : {state.userName}
-      <br />
-      <button onClick={() => dispatch(changeUserName("Mohan Functional comp"))}>
-        Change Username
+      Welcome : <b>{state.userName}</b> &nbsp;
+      <button onClick={() => dispatch(changeUserName("Functional comp"))}>
+        Functional Component
       </button>
     </div>
   );
