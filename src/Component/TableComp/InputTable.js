@@ -3,6 +3,7 @@ import './style.css'
 
 class InputTable extends Component {
     state = {
+        /**Mock Table row Data */
         data: [
             {
                 id: 1,
@@ -26,6 +27,8 @@ class InputTable extends Component {
         rowValues : {}
     };
 
+    /**Dynamically chages name and update the same in Name column */
+
     handleNameUpdate = (id, name) => {
         const { data } = this.state;
         const newData = data.map(row => {
@@ -40,6 +43,8 @@ class InputTable extends Component {
         this.setState({ data: newData });
     }
 
+    /** Based on the value selection it updates same in dropdown */
+
     handleSelect = (id, gender) => {
         const { data } = this.state;
         const newData = data.map(row => {
@@ -53,6 +58,8 @@ class InputTable extends Component {
         });
         this.setState({ data: newData });
     }
+
+    /** Receiving selected data from Child Component */
 
     selectedRows = (data) => {
         this.setState({ rowValues: data });
@@ -75,6 +82,7 @@ class InputTable extends Component {
                             </tr>
                         </thead>
                         <tbody>
+                            {/**Row data iteration and passes each row to child */}
                             {this.state.data.map(row => (
                                 <TableRow
                                     key={row.id}
