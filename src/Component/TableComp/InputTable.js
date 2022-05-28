@@ -8,22 +8,27 @@ class InputTable extends Component {
                 id: 1,
                 name: "first",
                 age: "20",
-                gender : "Male"
+                gender: "Male",
+                rowBtnEnable: true
             },
             {
                 id: 2,
                 name: "Second",
                 age: "30",
-                gender : "Male"
+                gender: "Male",
+                rowBtnEnable: true
             },
             {
                 id: 3,
                 name: "Third",
                 age: "40",
-                gender : "Male"
+                gender: "Male",
+                rowBtnEnable: true
             }
         ],
-        rowValues : {}
+        rowValues: [],
+        checkedRowsSel: [],
+        singleRowSubmit: {}
     };
 
     handleNameUpdate = (id, name) => {
@@ -54,8 +59,26 @@ class InputTable extends Component {
         this.setState({ data: newData });
     }
 
-    selectedRows = (data) => {
-        this.setState({ rowValues: data });
+    onSingleSubmit = (data) => {
+        this.setState({ singleRowSubmit: data });
+    }
+
+    checkedRows = (e, dataRows) => {
+        if (e.target.checked) {
+            this.setState((prevState) => ({
+                rowValues: prevState.rowValues.concat(dataRows.data)
+            }));
+        } else {
+            const removedData = this.state.rowValues && this.state.rowValues.filter(function (removeData) {
+                return removeData.id.toString() !== e.target.value;
+            });
+            this.setState({ rowValues: removedData });
+        }
+    }
+
+    onSubmitAll = (selData) => {
+        console.log(selData);
+        this.setState({ checkedRowsSel: selData });
     }
 
     render() {
@@ -80,16 +103,26 @@ class InputTable extends Component {
                                     key={row.id}
                                     data={row}
                                     onNameUpdate={this.handleNameUpdate}
-                                    onSelectChange = {this.handleSelect}
-                                    selectedRowData = {this.selectedRows}
+                                    onSelectChange={this.handleSelect}
+                                    selectedRowData={this.onSingleSubmit}
+                                    checkedRows={this.checkedRows}
                                 />
                             ))}
                         </tbody>
                     </table>
-                    <hr/>
-                    <div>
-                        {JSON.stringify(this.state.rowValues)}
+                    <div className='sbt-all-btn'>
+                        <button className='btn btn-primary' disabled={this.state.rowValues.length > 1 ? false : true} onClick={(e) => { this.onSubmitAll(this.state.rowValues) }}>Submit All</button>
                     </div>
+                    <hr />
+                    <div>
+                        <b>Checked Rows : </b>{JSON.stringify(this.state.rowValues)}
+                    </div>
+                    <hr />
+                    <div>
+                        <b>Data Received for Single Submit  : </b> {JSON.stringify(this.state.singleRowSubmit)}
+                    </div>
+                    <hr />
+                       <b> Data Received for Submit All : </b> {JSON.stringify(this.state.checkedRowsSel)}
                 </div>
             </div>
         );
@@ -107,17 +140,27 @@ class TableRow extends Component {
 
     handleSubmit = (e, rowData) => {
         this.props.selectedRowData(rowData.data);
-        console.log(rowData.data);
     }
+
+    handleChecked = (e, rowData) => {
+        this.props.checkedRows(e, rowData);
+        if (e.target.checked) {
+            rowData.data.rowBtnEnable = false;
+        } else {
+            rowData.data.rowBtnEnable = true;
+        }
+
+    }
+
     render() {
         const {
-            data: { id, name, age, gender }
+            data: { id, name, age, gender, rowBtnEnable }
         } = this.props;
 
         return (
             <tr>
                 <td>
-                    <input type='checkbox' value={id} />
+                    <input type='checkbox' value={id} onChange={(e) => { this.handleChecked(e, this.props) }} />
                 </td>
                 <td>{id}</td>
                 <td>{name}</td>
@@ -132,7 +175,7 @@ class TableRow extends Component {
                     <input type="text" value={name} onChange={this.handleChange} />
                 </td>
                 <td>
-                    <button id={id} value={this.props} onClick={(e) => { this.handleSubmit(e, this.props) }}>Submit</button>
+                    <button className='btn btn-success' id={id} value={this.props} disabled={rowBtnEnable} onClick={(e) => { this.handleSubmit(e, this.props) }}>Submit</button>
                 </td>
             </tr>
         );
