@@ -1,0 +1,31 @@
+.table-inp {
+    width: 800px;
+    height: 200px;
+}
+
+td {
+    text-align: center;
+
+}
+
+th {
+    background-color: #6f9f9f;
+    text-align-last: center;
+}
+
+tbody,
+td,
+tfoot,
+th,
+thead,
+tr {
+    border: 1px solid rgb(2, 1, 1);
+}
+
+.sbt-all-btn {
+    margin: 10px;
+}
+
+.MuiPaper-root .MuiDialog-paper{
+    width:70% !important;
+}
